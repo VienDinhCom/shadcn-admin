@@ -108,7 +108,7 @@ export function ProfileForm() {
                 ]}
               >
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className='w-full'>
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
