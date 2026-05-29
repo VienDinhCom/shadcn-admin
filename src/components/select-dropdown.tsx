@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/select'
 
 type SelectDropdownProps = {
-  onValueChange?: (value: string) => void
+  onValueChange?: (value: string | null | undefined) => void
   defaultValue: string | undefined
   placeholder?: string
   isPending?: boolean
@@ -33,11 +33,17 @@ export function SelectDropdown({
   const defaultState = isControlled
     ? { value: defaultValue, onValueChange }
     : { defaultValue, onValueChange }
+
+  const selectItems = [
+    ...(placeholder ? [{ label: placeholder, value: '' }] : []),
+    ...(items ?? []),
+  ]
+
   return (
-    <Select {...defaultState}>
+    <Select {...defaultState} items={selectItems}>
       <FormControl>
         <SelectTrigger disabled={disabled} className={cn(className)}>
-          <SelectValue placeholder={placeholder ?? 'Select'} />
+          <SelectValue />
         </SelectTrigger>
       </FormControl>
       <SelectContent>
@@ -50,7 +56,7 @@ export function SelectDropdown({
             </div>
           </SelectItem>
         ) : (
-          items?.map(({ label, value }) => (
+          selectItems.map(({ label, value }) => (
             <SelectItem key={value} value={value}>
               {label}
             </SelectItem>

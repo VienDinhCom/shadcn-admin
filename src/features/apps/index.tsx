@@ -23,12 +23,6 @@ const route = getRouteApi('/_authenticated/apps/')
 
 type AppType = 'all' | 'connected' | 'notConnected'
 
-const appText = new Map<AppType, string>([
-  ['all', 'All Apps'],
-  ['connected', 'Connected'],
-  ['notConnected', 'Not Connected'],
-])
-
 export function Apps() {
   const {
     filter = '',
@@ -38,7 +32,7 @@ export function Apps() {
   const navigate = route.useNavigate()
 
   const [sort, setSort] = useState(initSort)
-  const [appType, setAppType] = useState(type)
+  const [appType, setAppType] = useState<AppType>(type)
   const [searchTerm, setSearchTerm] = useState(filter)
 
   const filteredApps = apps
@@ -66,19 +60,22 @@ export function Apps() {
     })
   }
 
-  const handleTypeChange = (value: AppType) => {
-    setAppType(value)
+  const handleTypeChange = (value: string | null | undefined) => {
+    if (!value) return
+    setAppType(value as AppType)
     navigate({
       search: (prev) => ({
         ...prev,
-        type: value === 'all' ? undefined : value,
+        type: value === 'all' ? undefined : (value as AppType),
       }),
     })
   }
 
-  const handleSortChange = (sort: 'asc' | 'desc') => {
-    setSort(sort)
-    navigate({ search: (prev) => ({ ...prev, sort }) })
+  const handleSortChange = (sort: string | null | undefined) => {
+    if (!sort) return
+    const s: 'asc' | 'desc' = sort === 'asc' || sort === 'desc' ? sort : 'asc'
+    setSort(s)
+    navigate({ search: (prev) => ({ ...prev, sort: s }) })
   }
 
   return (
@@ -109,9 +106,17 @@ export function Apps() {
               value={searchTerm}
               onChange={handleSearch}
             />
-            <Select value={appType} onValueChange={handleTypeChange}>
+            <Select
+              value={appType}
+              onValueChange={handleTypeChange}
+              items={[
+                { label: 'All Apps', value: 'all' },
+                { label: 'Connected', value: 'connected' },
+                { label: 'Not Connected', value: 'notConnected' },
+              ]}
+            >
               <SelectTrigger className='w-36'>
-                <SelectValue>{appText.get(appType)}</SelectValue>
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='all'>All Apps</SelectItem>
@@ -121,11 +126,16 @@ export function Apps() {
             </Select>
           </div>
 
-          <Select value={sort} onValueChange={handleSortChange}>
+          <Select
+            value={sort}
+            onValueChange={handleSortChange}
+            items={[
+              { label: 'Ascending', value: 'asc' },
+              { label: 'Descending', value: 'desc' },
+            ]}
+          >
             <SelectTrigger className='w-16'>
-              <SelectValue>
-                <SlidersHorizontal size={18} />
-              </SelectValue>
+              <SelectValue>{() => <SlidersHorizontal size={18} />}</SelectValue>
             </SelectTrigger>
             <SelectContent align='end'>
               <SelectItem value='asc'>

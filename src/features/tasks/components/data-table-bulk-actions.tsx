@@ -74,19 +74,23 @@ export function DataTableBulkActions<TData>({
       <BulkActionsToolbar table={table} entityName='task'>
         <DropdownMenu>
           <Tooltip>
-            <TooltipTrigger asChild>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant='outline'
-                  size='icon'
-                  className='size-8'
-                  aria-label='Update status'
-                  title='Update status'
-                >
-                  <CircleArrowUp />
-                  <span className='sr-only'>Update status</span>
-                </Button>
-              </DropdownMenuTrigger>
+            <TooltipTrigger
+              render={
+                <DropdownMenuTrigger
+                  render={
+                    <Button
+                      variant='outline'
+                      size='icon'
+                      className='size-8'
+                      aria-label='Update status'
+                      title='Update status'
+                    />
+                  }
+                />
+              }
+            >
+              <CircleArrowUp />
+              <span className='sr-only'>Update status</span>
             </TooltipTrigger>
             <TooltipContent>
               <p>Update status</p>
@@ -96,7 +100,6 @@ export function DataTableBulkActions<TData>({
             {statuses.map((status) => (
               <DropdownMenuItem
                 key={status.value}
-                defaultValue={status.value}
                 onClick={() => handleBulkStatusChange(status.value)}
               >
                 {status.icon && (
@@ -110,19 +113,23 @@ export function DataTableBulkActions<TData>({
 
         <DropdownMenu>
           <Tooltip>
-            <TooltipTrigger asChild>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant='outline'
-                  size='icon'
-                  className='size-8'
-                  aria-label='Update priority'
-                  title='Update priority'
-                >
-                  <ArrowUpDown />
-                  <span className='sr-only'>Update priority</span>
-                </Button>
-              </DropdownMenuTrigger>
+            <TooltipTrigger
+              render={
+                <DropdownMenuTrigger
+                  render={
+                    <Button
+                      variant='outline'
+                      size='icon'
+                      className='size-8'
+                      aria-label='Update priority'
+                      title='Update priority'
+                    />
+                  }
+                />
+              }
+            >
+              <ArrowUpDown />
+              <span className='sr-only'>Update priority</span>
             </TooltipTrigger>
             <TooltipContent>
               <p>Update priority</p>
@@ -132,7 +139,6 @@ export function DataTableBulkActions<TData>({
             {priorities.map((priority) => (
               <DropdownMenuItem
                 key={priority.value}
-                defaultValue={priority.value}
                 onClick={() => handleBulkPriorityChange(priority.value)}
               >
                 {priority.icon && (
@@ -145,18 +151,20 @@ export function DataTableBulkActions<TData>({
         </DropdownMenu>
 
         <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant='outline'
-              size='icon'
-              onClick={() => handleBulkExport()}
-              className='size-8'
-              aria-label='Export tasks'
-              title='Export tasks'
-            >
-              <Download />
-              <span className='sr-only'>Export tasks</span>
-            </Button>
+          <TooltipTrigger
+            render={
+              <Button
+                variant='outline'
+                size='icon'
+                onClick={() => handleBulkExport()}
+                className='size-8'
+                aria-label='Export tasks'
+                title='Export tasks'
+              />
+            }
+          >
+            <Download />
+            <span className='sr-only'>Export tasks</span>
           </TooltipTrigger>
           <TooltipContent>
             <p>Export tasks</p>
@@ -164,18 +172,20 @@ export function DataTableBulkActions<TData>({
         </Tooltip>
 
         <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant='destructive'
-              size='icon'
-              onClick={() => setShowDeleteConfirm(true)}
-              className='size-8'
-              aria-label='Delete selected tasks'
-              title='Delete selected tasks'
-            >
-              <Trash2 />
-              <span className='sr-only'>Delete selected tasks</span>
-            </Button>
+          <TooltipTrigger
+            render={
+              <Button
+                variant='destructive'
+                size='icon'
+                onClick={() => setShowDeleteConfirm(true)}
+                className='size-8'
+                aria-label='Delete selected tasks'
+                title='Delete selected tasks'
+              />
+            }
+          >
+            <Trash2 />
+            <span className='sr-only'>Delete selected tasks</span>
           </TooltipTrigger>
           <TooltipContent>
             <p>Delete selected tasks</p>

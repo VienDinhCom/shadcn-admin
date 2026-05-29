@@ -97,10 +97,19 @@ export function ProfileForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                items={[
+                  { label: 'Select a verified email to display', value: '' },
+                  { label: 'm@example.com', value: 'm@example.com' },
+                  { label: 'm@google.com', value: 'm@google.com' },
+                  { label: 'm@support.com', value: 'm@support.com' },
+                ]}
+              >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder='Select a verified email to display' />
+                    <SelectValue />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

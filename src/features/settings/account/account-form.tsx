@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ChevronsUpDown, Check } from 'lucide-react'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -110,24 +110,26 @@ export function AccountForm() {
             <FormItem className='flex flex-col'>
               <FormLabel>Language</FormLabel>
               <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant='outline'
-                      role='combobox'
-                      className={cn(
-                        'w-50 justify-between',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value
-                        ? languages.find(
-                            (language) => language.value === field.value
-                          )?.label
-                        : 'Select language'}
-                      <CaretSortIcon className='ms-2 h-4 w-4 shrink-0 opacity-50' />
-                    </Button>
-                  </FormControl>
+                <PopoverTrigger
+                  render={
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'w-50 justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                      />
+                    </FormControl>
+                  }
+                >
+                  {field.value
+                    ? languages.find(
+                        (language) => language.value === field.value
+                      )?.label
+                    : 'Select language'}
+                  <ChevronsUpDown className='ms-2 h-4 w-4 shrink-0 opacity-50' />
                 </PopoverTrigger>
                 <PopoverContent className='w-50 p-0'>
                   <Command>
@@ -143,7 +145,7 @@ export function AccountForm() {
                               form.setValue('language', language.value)
                             }}
                           >
-                            <CheckIcon
+                            <Check
                               className={cn(
                                 'size-4',
                                 language.value === field.value

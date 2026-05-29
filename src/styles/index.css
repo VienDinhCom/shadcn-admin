@@ -17,7 +17,7 @@
     @apply min-h-svh w-full bg-background text-foreground has-[div[data-variant='inset']]:bg-sidebar;
   }
 
-  /* Override Radix scroll locking for sticky headers */
+  /* Override Base UI scroll locking for sticky headers */
   body[data-scroll-locked] {
     overflow: unset !important;
   }
@@ -57,31 +57,4 @@
   @apply after:pointer-events-none after:absolute after:inset-s-0 after:bottom-0 after:hidden after:h-32 after:w-full after:rounded-b-2xl after:bg-[linear-gradient(180deg,transparent_10%,var(--background)_70%)] md:after:block;
 }
 
-/* styles.css */
-.CollapsibleContent {
-  overflow: hidden;
-}
-.CollapsibleContent[data-state='open'] {
-  animation: slideDown 300ms ease-out;
-}
-.CollapsibleContent[data-state='closed'] {
-  animation: slideUp 300ms ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-collapsible-content-height);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: var(--radix-collapsible-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
+/* CollapsibleContent animation handled by Base UI */

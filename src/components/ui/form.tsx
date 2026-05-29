@@ -8,8 +8,6 @@ import {
   type FieldPath,
   type FieldValues,
 } from 'react-hook-form'
-import * as LabelPrimitive from '@radix-ui/react-label'
-import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils'
 import { Label } from '@/components/ui/label'
 
@@ -87,7 +85,7 @@ function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
 function FormLabel({
   className,
   ...props
-}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+}: React.ComponentProps<typeof Label>) {
   const { error, formItemId } = useFormField()
 
   return (
@@ -101,7 +99,7 @@ function FormLabel({
   )
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
+function FormControl({ ...props }: React.ComponentProps<typeof Label>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
   return (
@@ -150,6 +148,18 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
       {body}
     </p>
   )
+}
+
+function Slot({
+  children,
+  ...props
+}: { children?: React.ReactNode } & Record<string, unknown>) {
+  if (React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      ...props,
+    } as React.Attributes & Record<string, unknown>)
+  }
+  return <>{children}</>
 }
 
 export {

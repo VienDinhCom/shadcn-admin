@@ -24,7 +24,8 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const navigate = useNavigate()
   const [val, setVal] = useState(pathname ?? '/settings')
 
-  const handleSelect = (e: string) => {
+  const handleSelect = (e: string | null | undefined) => {
+    if (!e) return
     setVal(e)
     navigate({ to: e })
   }
@@ -32,9 +33,13 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   return (
     <>
       <div className='p-1 md:hidden'>
-        <Select value={val} onValueChange={handleSelect}>
+        <Select
+          value={val}
+          onValueChange={handleSelect}
+          items={items.map((item) => ({ label: item.title, value: item.href }))}
+        >
           <SelectTrigger className='h-12 sm:w-48'>
-            <SelectValue placeholder='Theme' />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             {items.map((item) => (
@@ -49,11 +54,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         </Select>
       </div>
 
-      <ScrollArea
-        orientation='horizontal'
-        type='always'
-        className='hidden w-full min-w-40 bg-background px-1 py-2 md:block'
-      >
+      <ScrollArea className='hidden w-full min-w-40 bg-background px-1 py-2 md:block'>
         <nav
           className={cn(
             'flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0',
