@@ -13,6 +13,13 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
+import { Input } from '@/components/ui/input'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { DatePicker } from '@/components/date-picker'
 import {
   Form,
   FormControl,
@@ -21,14 +28,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import { DatePicker } from '@/components/date-picker'
+} from '@/components/form'
 
 const languages = [
   { label: 'English', value: 'en' },

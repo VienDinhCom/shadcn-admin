@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { useFont } from '@/context/font-provider'
 import { useTheme } from '@/context/theme-provider'
 import { Button, buttonVariants } from '@/components/ui/button'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   Form,
   FormControl,
@@ -16,8 +17,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+} from '@/components/form'
 
 const appearanceFormSchema = z.object({
   theme: z.enum(['light', 'dark']),

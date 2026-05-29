@@ -1,7 +1,9 @@
-'use client'
-
 import * as React from 'react'
-import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronDownIcon,
+} from 'lucide-react'
 import {
   DayPicker,
   getDefaultClassNames,
@@ -86,7 +88,7 @@ function Calendar({
             : 'flex items-center gap-1 rounded-(--cell-radius) text-sm [&>svg]:size-3.5 [&>svg]:text-muted-foreground',
           defaultClassNames.caption_label
         ),
-        month_grid: 'w-full border-collapse',
+        table: 'w-full border-collapse',
         weekdays: cn('flex', defaultClassNames.weekdays),
         weekday: cn(
           'flex-1 rounded-(--cell-radius) text-[0.8rem] font-normal text-muted-foreground select-none',
@@ -146,7 +148,7 @@ function Calendar({
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === 'left') {
             return (
-              <ChevronLeft
+              <ChevronLeftIcon
                 className={cn('size-4 rtl:rotate-180', className)}
                 {...props}
               />
@@ -155,14 +157,16 @@ function Calendar({
 
           if (orientation === 'right') {
             return (
-              <ChevronRight
+              <ChevronRightIcon
                 className={cn('size-4 rtl:rotate-180', className)}
                 {...props}
               />
             )
           }
 
-          return <ChevronDown className={cn('size-4', className)} {...props} />
+          return (
+            <ChevronDownIcon className={cn('size-4', className)} {...props} />
+          )
         },
         DayButton: ({ ...props }) => (
           <CalendarDayButton locale={locale} {...props} />

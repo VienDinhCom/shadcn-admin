@@ -8,7 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from '@/components/ui/form'
+} from '@/components/form'
 import { PasswordInput } from './password-input'
 
 describe('PasswordInput', () => {
