@@ -39,7 +39,7 @@ export function Dashboard() {
           </div>
         </div>
         <Tabs
-          orientation='vertical'
+          orientation='horizontal'
           defaultValue='overview'
           className='space-y-4'
         >
